@@ -16,18 +16,14 @@ type ResetPasswordProps = ScreenProps<'ResetPassword'>;
 
 const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
   const [email, setEmail] = useState<string>();
-  const [otp, setotp] = useState<string>();
-  const [otpInputBox, setOtpInputBox] = useState(false);
   const [btnText, setBtnText] = useState('Reset Password');
   const [emailState, setEmailState] = useState(true);
 
   const handleResetBtn = () => {
     if (emailState === true && email) {
       setEmailState(false);
-      setBtnText('Validate OTP');
-      setOtpInputBox(true);
+      setBtnText('OTP sent');
       resetPassword(email);
-    } else if (emailState === false && otp) {
     }
   };
 
@@ -47,17 +43,6 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
               setEmail(text);
             }}
             editable={emailState}
-            placeholderTextColor={'gray'}
-          />
-          <TextInput
-            style={[
-              styles.textInput,
-              otpInputBox === false ? {display: 'none'} : {},
-            ]}
-            onChangeText={userOTP => {
-              setotp(userOTP);
-            }}
-            placeholder="Enter the OTP"
             placeholderTextColor={'gray'}
           />
         </View>
